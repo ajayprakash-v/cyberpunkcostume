@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<script src="jquery.js"></script>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		main{
+			width: 100%;
+			height: 100vh;
+			overflow-y: scroll;
+			overflow-x: hidden;
+			position: relative;
+			scroll-snap-type: y mandatory;
+			background-color: white;
+		}
+		section{
+			width: 100%;
+			height: 100vh;
+			background:linear-gradient(to right, rgba(170, 170, 170, 1) 0%, 4.869358669833729%, rgba(217, 217, 217, 1) 30.69908916950226%, 70.54631828978623%, rgba(126, 126, 126, 1) 100%);
+			position: relative;
+			transform-style: preserve-3d;
+			perspective: 1000px;
+			overflow: hidden;
+			scale: .8;
+			transition: .5s;
+			scroll-snap-align: center;
+			z-index: 2;
+			border-radius: 10px;
+		}
+		#strip{
+			transform: translateZ(-800px) scale(1.75);
+			position: relative;
+			top: -300px;
+			transform-style: preserve-3d;
+			perspective: 1000px;
+		}
+		#strip div{
+			width: 10vw;
+			height: 70vh;
+			background-color: red;
+			left: 20vw;
+			z-index: 2;
+			position: absolute;
+			box-shadow: 10px -10px 10px rgba(0, 0, 0, .2),inset -10px -10px 50px rgba(0, 0, 0, .2);
+		}
+		#strip div:nth-child(2){
+			background-color: red;
+			height: 30vh;
+			transform-origin: top;
+			top: 31.5vw;
+			z-index: 1;
+			transform: rotateX(55deg);
+			box-shadow: 0px 0px 0px rgba(0, 0, 0, .5),inset 0px 0px 0px rgba(0, 0, 0, .5);
+		}
+		section img{
+			width: 30vw;
+			position: absolute;
+			z-index: 100;
+			left: 20%;
+			top: 4vw;
+			transition: 1s;
+			transform: translateZ(100px) scale(1.2);
+		}
+		#blurback{
+			position: absolute;
+			width: 100%;
+			height: 65vh;
+			backdrop-filter: blur(5px);
+		}
+		@font-face{
+			src: url('f1.otf');
+			font-family: f1;
+		}
+		@font-face{
+			src: url('f2.ttf');
+			font-family: f2;
+		}
+		#text{
+			position: absolute;
+			top: 18vw;
+			z-index: 100;
+			font-family: f1;
+			letter-spacing: 10px;
+			font-size: 5vw;
+			color: white;
+			text-shadow: 10px 10px 20px rgba(0, 0, 0, .5);
+			display: flex;
+			align-items: center;
+			transform: rotate(90deg) scale(.6) translateZ(300px);
+		}
+		#details{
+			position: absolute;
+			right: 18%;
+			top: 30%;
+			z-index: 100;
+			width: 40vw;
+			height: 50vh;
+			backdrop-filter: blur(10px);
+			transform: translateZ(500px) scale(.45);
+			box-shadow: 10px 10px 30px rgba(0, 0, 0, .5);
+		}
+		h3{
+			font-family: f1;
+			color: white;
+			letter-spacing: 2px;
+		}
+		h4{
+			font-family: f2;
+			color: red;
+			letter-spacing: 5px;
+			font-size: 3vw;
+			opacity: .5;	
+		}
+		#overlay{
+			transform-style: preserve-3d;
+			perspective: 1000px;
+		}
+		#overlay img:nth-child(1){
+			position: absolute;
+			width: 50vw;
+			top: 0vw;
+			filter: blur(1px);
+			transform: translateZ(-300px) scale(4);
+		}
+		section img:nth-child(1){
+			position: absolute;
+			z-index: 500;
+			scale: 3;
+			left: 20vw;
+			filter: blur(10px);
+			top: 35vw;
+		}
+		.unblur{
+			transform: translateZ(300px);
+			z-index:500 ;
+			transition: .7s;
+		}
+		.unbright{
+			scale: 1;
+		}
+		#frame{
+			position: fixed;
+			z-index: 1000;
+			top: -50px;
+			left: 30px;
+			filter: blur(4px);
+			z-index: 1;
+			transition: .8s;
+		}
+		.scaleframe{
+			transition: .8s;
+			scale: 2;
+		}
+	</style>
+</head>
+<body>
+	<img src="images/frame.png" id="frame">
+<main>
+	
+</main>
+<script>
+	const names = ["CONTRA WHITE","SQUAD WHITE","BLACK WIL","WYNK WHITE","BLACK SAMURAI","GRAY SOLDIER","BLACK PLAY","GANG WHITE",]
+	for(let i=0 ; i<8 ; i++){
+		$('main').append(`
+			<section onclick="cl(this)">
+		<img src="images/b1.png">
+		<div id="overlay">
+			<img src="images/b1.png">
+		</div>
+		<div id="strip">
+			<div></div>
+			<div></div>
+		</div>
+		<div id="blurback"></div>
+		<img src="images/${i}.png" id="person">
+		<div id="text">
+			<h1>nINJA</h1>
+			<div style="width:3vw;height:6vw;background-color: rgba(0, 0, 0, 1);margin-left: 2vw;"></div>
+			<div style="margin-left: 2vw;">
+				<h5>mODE</h5>
+				<h5>EdITION</h5>
+			</div>
+		</div>
+		<div id="details">
+			<div style="display:flex;justify-content: space-around;margin-bottom: 1vw;margin: 10px;">
+				<h3>CYBER PUNK</h3>
+				<div style="width:60%;align-items: center;background-color:darkgray;"></div>
+			</div>
+			<div style="width: 80%;height: 70%;background-color: rgba(255, 255, 255, .5);padding: 1vw;">
+				<h4>${names[i]}</h4>
+				<p style="margin-top: 2vw;">The Samurai Jacket is the name of the outerwear V wears in Cyberpunk 2077's promotional material and can be located and worn in-game.</p>
+			</div>
+		</div>
+	</section>
+			`)
+	}
+		var click = true
+		function cl(el){
+			if (click){
+			click = false
+			el.querySelector('#person').classList.add('unblur')
+			document.querySelector('#frame').classList.add('scaleframe')
+			el.classList.add('unbright')
+		}
+			else{
+				click = true
+				el.querySelector('#person').classList.remove('unblur')
+				document.querySelector('#frame').classList.remove('scaleframe')
+				el.classList.remove('unbright')
+			}
+		}
+	</script>
+</body>
+</html>
